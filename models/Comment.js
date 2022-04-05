@@ -13,6 +13,7 @@ Comment.init(
     },
     text_area: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
     user_id: {
       type: DataTypes.INTEGER,
@@ -34,7 +35,7 @@ Comment.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'post',
+    modelName: 'comment',
   }
 );
 
