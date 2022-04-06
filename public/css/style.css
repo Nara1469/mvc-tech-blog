@@ -13,12 +13,19 @@ header, .project:not(:last-child) {
 }
 
 .no-button:hover {
-  color: #065b83;
+  color: #6c99e1;
   text-decoration: underline;
 }
 
-.dollar-amount {
-  color: #056605;
-  font-weight: bold;
-  margin-left: -5px;
+.back-color {
+  background-color: #54c7fc;
+  color: white;
+}
+
+.add-space {
+  margin-bottom: 15px;
+}
+
+.text-right {
+  text-align: right;
 }
