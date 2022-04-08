@@ -1,7 +1,7 @@
 [
   {
-    "title": "Music Near Me",
-    "content": "A mobile app that will send you notifications whenever a concert is playing in your area.",
+    "title": "Authentication vs. Authorization",
+    "content": "Authentication is the process of verifying a user’s identity and their ability to access a requested account. Authorization, on the other hand, establishes which permissions the user has within an app.",
     "date_created": "01/01/2022",
     "user_id": 1
   },

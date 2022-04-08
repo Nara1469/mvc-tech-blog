@@ -4,11 +4,18 @@ Bootcamp Week 14: Homework
 
 # 14 Model-View-Controller (MVC): Tech Blog
 
-## Your Task
+## Table of Contents 
 
-Writing about tech can be just as important as making it. Developers spend plenty of time creating new applications and debugging existing codebases, but most developers also spend at least some of their time reading and writing about technical concepts, recent advancements, and new technologies. A simple Google search for any concept covered in this course returns thousands of think pieces and tutorials from developers of all skill levels!
+- [About Task](#about-task)
+- [User Story](#user-story)
+- [Getting Started](#getting-started)
+- [Database Models](#database-models)
+- [My Solution](#my-solution)
+- [Live](#live)
 
-Your task this week is to build a CMS-style blog site similar to a Wordpress site, where developers can publish their blog posts and comment on other developers’ posts as well. You’ll build this site completely from scratch and deploy it to Heroku. Your app will follow the MVC paradigm in its architectural structure, using Handlebars.js as the templating language, Sequelize as the ORM, and the express-session npm package for authentication.
+## About Task
+
+The purpose of the task is to build a CMS-style blog site similar to a Wordpress site, where developers can publish their blog posts and comment on other developers’ posts as well. This app will follow the MVC paradigm in its architectural structure, using Handlebars.js as the templating language, Sequelize as the ORM, and the express-session npm package for authentication. I built this site completely from scratch and deploy it to Heroku.
 
 ## User Story
 
@@ -56,11 +63,29 @@ WHEN I am idle on the site for more than a set time
 THEN I am able to view comments but I am prompted to log in again before I can add, update, or delete comments
 ```
 
-## Mock-Up
+## Database Models
 
-The following animation demonstrates the application functionality:
+The database name: `blog_db` contains the following four tables:
 
-![Animation cycles through signing into the app, clicking on buttons, and updating blog posts.](./assets/14-mvc-homework-demo-01.gif) 
+- User
+- Post
+- Comment
+
+The database structure is shown in the following image:
+
+![Database structure](./assets/blog-database.png)
+
+### Associations
+
+The Sequelize models execute the following relationships using association methods:
+
+* `Post` belongs to `User`, and `User` has many `Post` models, as a user can have multiple posts but a post can only belong to one user.
+
+* `Comment` belongs to `User`, and `User` has many `Comment` models, as a user can have multiple comments but a comment can only belong to one user.
+
+* `Comment` belongs to `Post`, and `Post` has many `Comment` models, as a post can have multiple comments but a comment can only belong to one post.
+
+> **Note:** The foreign key relationship setup is important in the respective models. It was the challenging part of this task.
 
 ## Getting Started
 
@@ -70,19 +95,6 @@ You’ll also need the [dotenv package](https://www.npmjs.com/package/dotenv) to
 
 **Note**: The [express-session](https://www.npmjs.com/package/express-session) package stores the session data on the client in a cookie. When you are idle on the site for more than a set time, the cookie will expire and you will be required to log in again to start a new session. This is the default behavior and you do not have to do anything to your application other than implement the npm package.
 
-## Grading Requirements
-
-> **Note**: If a homework assignment submission is marked as “0”, it is considered incomplete and will not count towards your graduation requirements. Examples of incomplete submissions include the following:
->
-> * A repository that has no code
->
-> * A repository that includes a unique name but nothing else
->
-> * A repository that includes only a README file but nothing else
->
-> * A repository that only includes starter code
-
-This homework is graded based on the following criteria:
 
 ### Technical Acceptance Criteria: 40%
 
@@ -94,44 +106,13 @@ This homework is graded based on the following criteria:
 
     * Application must be deployed to Heroku.
 
-### Deployment: 32%
 
-* Application deployed at live URL.
+### Screenshots 
 
-* Application loads with no errors.
+The following image shows the deployed HTML’s appearance: ![Heroku](./helpers/note-taker-application-heroku.png)
 
-* Application GitHub URL submitted.
+## Live
 
-* GitHub repository contains application code.
+This application is deployed to Heroku.com. Here is a link to the deployed website. [Heroku](https://the-tech-blog-mvc-structure.herokuapp.com/)
 
-### Application Quality: 15%
-
-* User experience is intuitive and easy to navigate.
-
-* User interface style is clean and polished.
-
-* Application resembles the mock-up functionality provided in the homework instructions.
-
-### Repository Quality: 13%
-
-* Repository has a unique name.
-
-* Repository follows best practices for file structure and naming conventions.
-
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
-
-* Repository contains multiple descriptive commit messages.
-
-* Repository contains quality readme file with description, screenshot, and link to deployed application.
-
-## Review
-
-You are required to submit BOTH of the following for review:
-
-* The URL of the functional, deployed application.
-
-* The URL of the GitHub repository, with a unique name and a readme describing the project.
-
----
-© 2022 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
-
+If you have any questions about the repo, open an issue or contact me directly at naraamtm@gmail.com. Here is a link to this application repo on [Github](https://github.com/Nara1469/mvc-tech-blog).

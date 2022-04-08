@@ -32,15 +32,17 @@ router.get('/', async (req, res) => {
 // Show the chosen post
 router.get('/post/:id', async (req, res) => {
   try {
+    console.log("Parameter ID:" + req.params.id);
     const postData = await Post.findByPk(req.params.id, {
       include: [{ model: User }, { model: Comment }]
     });
 
     const post = postData.get({ plain: true });
 
+    console.log("logged_in value:" + req.session.logged_in);
     res.render('post', {
       ...post,
-      // logged_in: req.session.logged_in
+      logged_in: req.session.logged_out
     });
   } catch (err) {
     res.status(500).json(err);
