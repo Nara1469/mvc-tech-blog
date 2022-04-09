@@ -1,15 +1,39 @@
-<!-- Loop over each object in the posts array -->
+<!-- Loop over each post in the posts array -->
 {{#each posts as |post| }}
 <div class="row mb-4 post">
   <div class="col-md-12">
     <div class="card add-space">
       <div class="card-header back-color">
-        <h4 data-id="{{post.id}}>{{{get_emoji}}}<a href="/post/{{post.id}}">{{post.title}}</a></h4>
+        <h4>{{{get_emoji}}}<a href="/post/{{post.id}}">{{post.title}}</a></h4>
         <p class="text-right">Posted by {{post.user.username}} on {{format_date post.date_created}}</p>
       </div>
       <div class="card-body">
         <p class="card-text">{{post.content}}</p>
       </div>
+      {{#if post.comments}}
+      <div id="comments">
+        <h5>Comments:</h5>
+        <!-- Loop over each comments in a post -->
+        {{#each post.comments as |comment| }}
+          <div class="row comment">
+            <div class="col-md-2">
+            <div class="card add-space">
+            </div>
+          </div>
+          <div class="col-md-10">
+            <div class="card add-space">
+              <div class="card-header back-color">
+                <p class="text-right">Posted by {{comment.user_id}}</p>
+              </div>
+              <div class="card-body">
+                <p class="card-text">{{comment.text_area}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+      {{/if}}
     </div>
   </div>
 </div>

@@ -1,5 +1,19 @@
-header, .project:not(:last-child) {
+/* header, .project:not(:last-child) {
   border-bottom: 1px solid #ccc;
+} */
+
+a {
+  color: white;
+}
+
+textarea {
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  color: #000000;
+  padding: 10px;
 }
 
 .no-button {
@@ -24,8 +38,4 @@ header, .project:not(:last-child) {
 
 .add-space {
   margin-bottom: 15px;
-}
-
-.text-right {
-  text-align: right;
 }

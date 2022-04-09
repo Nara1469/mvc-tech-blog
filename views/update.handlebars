@@ -1,0 +1,22 @@
+<div class="row mt-4">
+  <h3>{{post.user.username}}'s Current Post</h3>
+  <div class="col-md-12">
+    <div class="card add-space">
+      <div class="card-header back-color">
+        <label for="post-title">Title:</label>
+      </div>
+      <div class="card-body">
+        <textarea id="post-title" name="post-title">{{post.title}}</textarea>
+      </div>
+      <div class="card-header back-color">
+        <label for="post-content">Content:</label>
+      </div>
+      <div class="card-body">
+        <textarea id="post-content" name="post-content">{{post.content}}</textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" id="update-post" data-id="{{post.id}}">SUBMIT</button>
+    </div>
+  </div>
+</div>
+
+<script src="./js/update.js"></script>

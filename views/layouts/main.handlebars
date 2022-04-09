@@ -7,8 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
     integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-  {{!--
-  <link rel="stylesheet" href="./css/jass.css"> --}}
+  {{!-- <link rel="stylesheet" href="./css/jass.css"> --}}
   <link rel="stylesheet" href="./css/style.css">
   <title>The Tech Blog</title>
 </head>
@@ -20,7 +19,7 @@
         <h3><a href="/">Home</a> |
           <a href="/dashboard">Dashboard</a> |
           {{#if logged_in}}
-          <a href="/logout">Logout</a>
+          <button class="no-button" id="logout">Logout</button>
           {{else}}
           <a href="/login">Login</a>
           {{/if}}
@@ -49,7 +48,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     {{#if logged_in}}
-    <script src="/js/dashboard.js"></script>
+    <script src="/js/logout.js"></script>
     {{/if}}
 
 </body>

@@ -1,10 +1,5 @@
 [
   {
-    "text_area": "Music Near Me",
-    "user_id": 2,
-    "post_id": 1
-  },
-  {
     "text_area": "The Ultimate Tech Quiz",
     "user_id": 3,
     "post_id": 1
@@ -22,11 +17,6 @@
   {
     "text_area": "The Ultimate Tech Quiz",
     "user_id": 1,
-    "post_id": 3
-  },
-  {
-    "text_area": "Roll 'Em Up",
-    "user_id": 2,
     "post_id": 3
   }
 ]

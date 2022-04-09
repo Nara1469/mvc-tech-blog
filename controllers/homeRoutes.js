@@ -5,23 +5,27 @@ const withAuth = require('../utils/auth');
 // Show all posts in homepage
 router.get('/', async (req, res) => {
   try {
-    // Get all posts and JOIN with user data
+    // Get all posts and JOIN with user and comment
     const postData = await Post.findAll({
-      include: [
-        {
-          model: User,
-          attributes: ['username'],
-        },
-      ],
+      include: [{ model: User }, { model: Comment }]
     });
 
     // Serialize data so the template can read it
     const posts = postData.map((post) => post.get({ plain: true }));
 
+    // const commentData = await Comment.findAll({
+    //   include: [{ model: User }, { model: Post }]
+    // });
+
+    // // Serialize data so the template can read it
+    // const comments = commentData.map((comment) => comment.get({ plain: true }));
+
+
     // Pass serialized data and session flag into template
     res.render('homepage', {
       posts,
-      logged_in: req.session.logged_out
+      // comments,
+      logged_in: false
     });
 
   } catch (err) {
@@ -39,10 +43,9 @@ router.get('/post/:id', async (req, res) => {
 
     const post = postData.get({ plain: true });
 
-    console.log("logged_in value:" + req.session.logged_in);
     res.render('post', {
-      ...post,
-      logged_in: req.session.logged_out
+      post
+      // logged_in: true
     });
   } catch (err) {
     res.status(500).json(err);
@@ -55,13 +58,51 @@ router.get('/dashboard', withAuth, async (req, res) => {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{ model: Post }],
+      include: [{ model: Post }]
     });
 
     const user = userData.get({ plain: true });
 
     res.render('dashboard', {
-      ...user,
+      user,
+      logged_in: true
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Create a new post
+router.get('/create/:id', withAuth, async (req, res) => {
+  try {
+    // Find the logged in user based on the session ID
+    const userData = await User.findByPk(req.params.id, {
+      attributes: { exclude: ['password'] },
+    });
+
+    const user = userData.get({ plain: true });
+
+    res.render('create', {
+      user,
+      logged_in: true
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Update a post
+router.get('/update/:id', withAuth, async (req, res) => {
+  try {
+    // Find the logged in user based on the session ID
+    const postData = await Post.findByPk(req.params.id, {
+      include: [{ model: User }]
+    });
+
+    const post = postData.get({ plain: true });
+
+    res.render('update', {
+      post,
       logged_in: true
     });
   } catch (err) {
