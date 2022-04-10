@@ -2,7 +2,10 @@ const router = require('express').Router();
 const { Post, Comment, User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-router.post('/', async (req, res) => {
+// Route: /api/posts
+
+// Create a post
+router.post('/', withAuth, async (req, res) => {
   try {
     const newPost = await Post.create({
       title: req.body.title,
@@ -16,7 +19,8 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.delete('/:id', async (req, res) => {
+// Delete a post
+router.delete('/:id', withAuth, async (req, res) => {
   try {
     const postData = await Post.destroy({
       where: {
@@ -37,7 +41,7 @@ router.delete('/:id', async (req, res) => {
 });
 
 // Update a post
-router.put('/:id', async (req, res) => {
+router.put('/:id', withAuth, async (req, res) => {
   try {
     const postData = await Post.update(
       {
@@ -63,7 +67,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // Read a post
-router.get('/:id', async (req, res) => {
+router.get('/:id', withAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
     const postData = await Post.findByPk(req.params.id, {

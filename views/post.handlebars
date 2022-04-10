@@ -1,46 +1,40 @@
 <!-- Loop over each post in the posts array -->
 <div class="row mb-4 post">
   <div class="col-md-12">
-    <div class="card add-space">
-      <div class="card-header back-color">
-        <h4><a href="/post/{{post.id}}">{{post.title}}</a></h4>
-        <p class="text-right">Posted by {{post.user.username}} on {{format_date post.date_created}}</p>
+    <div class="card-header back-color">
+      <h4><a href="/post/{{post.id}}">{{post.title}}</a></h4>
+      <p class="text-right">Posted by {{post.user.username}} on {{format_date post.date_created}}</p>
+    </div>
+    <div class="card-body">
+      <p class="card-text">{{post.content}}</p>
+    </div>
+    {{#if post.comments}}
+    <h5>Comments:</h5>
+    <!-- Loop over each comments in a post -->
+    {{#each post.comments as |comment| }}
+    <div class="row comment">
+      <div class="col-md-2">
+        <div class="card add-space">
+        </div>
       </div>
-      <div class="card-body">
-        <p class="card-text">{{post.content}}</p>
-      </div>
-      {{#if post.comments}}
-      <div id="comments">
-        <h5>Comments:</h5>
-        <!-- Loop over each comments in a post -->
-        {{#each post.comments as |comment| }}
-        <div class="row comment">
-          <div class="col-md-2">
-            <div class="card add-space">
-            </div>
+      <div class="col-md-10">
+        <div class="card add-space">
+          <div class="card-header back-color">
+            <p class="text-right">Posted by {{comment.user_id}}</p>
           </div>
-          <div class="col-md-10">
-            <div class="card add-space">
-              <div class="card-header back-color">
-                <p class="text-right">Posted by {{comment.user_id}}</p>
-              </div>
-              <div class="card-body">
-                <p class="card-text">{{comment.text_area}}</p>
-              </div>
-            </div>
+          <div class="card-body">
+            <p class="card-text">{{comment.text_area}}</p>
           </div>
         </div>
-        {{/each}}
       </div>
-      {{/if}}
-    </div>
+      {{/each}}
+    {{/if}}
   </div>
 </div>
 {{#if logged_in}}
-<p>
-  <button class="btn btn-primary add-comment" data-id="{{post.id}}">Add Comment</button>
+<p class="text-center">
+  <button class="btn btn-primary"><a href="/comment/{{post.id}}"> Add Comment </a></button>
 </p>
 {{/if}}
-</div>
 
-<script src="./js/comment.js"></script>
+<script src="/js/comment.js"></script>

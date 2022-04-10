@@ -1,18 +1,11 @@
 const buttonUpdate = document.querySelector('#update-post');
-console.log("button: " + buttonUpdate);
-
 
 const updatePost = async (event) => {
   event.preventDefault();
 
-  const title = document.querySelector('#post-title').value.trim();
-  console.log("title: " + title);
-
-  const content = document.querySelector('#post-content').value.trim();
-  console.log("content: " + content);
-
+  const title = document.querySelector('#post-title').value;
+  const content = document.querySelector('#post-content').value;
   const id = event.target.getAttribute('data-id');
-  console.log("post id: " + id);
 
   if (title && content) {
     const response = await fetch(`/api/posts/${id}`, {

@@ -1,6 +1,9 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 
+// Route: /api/users
+
+// Add new user
 router.post('/', async (req, res) => {
   try {
     const userData = await User.create(req.body);
@@ -16,6 +19,7 @@ router.post('/', async (req, res) => {
   }
 });
 
+// Checking and Saving a existing user Login
 router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { username: req.body.username } });

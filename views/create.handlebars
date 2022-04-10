@@ -1,20 +1,23 @@
 <div class="row mt-4">
-  <h3>{{user.username}}: Create a New Post</h3>
   <div class="col-md-12">
-    <form class="form new-post-form">
-      <div class="form-group">
+    <h3>{{user.username}}: Create a New Post</h3>
+    <div class="col-md-12">
+    {{!-- <div class="card add-space"> --}}
+      <div class="card-header back-color">
         <label for="post-title">Title:</label>
-        <input class="form-input" type="text" id="post-title" name="post-title" />
       </div>
-      <div class="form-group">
-        <label for="post-content">Context:</label>
-        <textarea class="form-input" id="post-content" name="post-content"></textarea>
+      <div class="card-body">
+        <textarea id="post-title" name="post-title" style="width: 100%; height: 100%; padding: 10px;" rows="1"></textarea>
       </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary add-post">CREATE</button>
+      <div class="card-header back-color">
+        <label for="post-content">Content:</label>
       </div>
-    </form>
+      <div class="card-body">
+        <textarea id="post-content" name="post-content" style="width: 100%; height: 100%; padding: 10px;" rows="1"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" id="add-post">CREATE</button>
+    {{!-- </div> --}}
   </div>
 </div>
 
-<script src="./js/create.js"></script>
+<script src="/js/dashboard.js"></script>

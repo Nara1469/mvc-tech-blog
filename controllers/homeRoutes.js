@@ -5,27 +5,22 @@ const withAuth = require('../utils/auth');
 // Show all posts in homepage
 router.get('/', async (req, res) => {
   try {
-    // Get all posts and JOIN with user and comment
     const postData = await Post.findAll({
       include: [{ model: User }, { model: Comment }]
     });
 
-    // Serialize data so the template can read it
     const posts = postData.map((post) => post.get({ plain: true }));
 
     // const commentData = await Comment.findAll({
     //   include: [{ model: User }, { model: Post }]
     // });
 
-    // // Serialize data so the template can read it
     // const comments = commentData.map((comment) => comment.get({ plain: true }));
 
-
-    // Pass serialized data and session flag into template
     res.render('homepage', {
       posts,
       // comments,
-      logged_in: false
+      logged_in: req.session.logged_in
     });
 
   } catch (err) {
@@ -33,7 +28,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Show the chosen post
+// Show the clicked post
 router.get('/post/:id', async (req, res) => {
   try {
     console.log("Parameter ID:" + req.params.id);
@@ -44,8 +39,8 @@ router.get('/post/:id', async (req, res) => {
     const post = postData.get({ plain: true });
 
     res.render('post', {
-      post
-      // logged_in: true
+      post,
+      logged_in: req.session.logged_in
     });
   } catch (err) {
     res.status(500).json(err);
@@ -104,6 +99,25 @@ router.get('/update/:id', withAuth, async (req, res) => {
     res.render('update', {
       post,
       logged_in: true
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Add a comment
+router.get('/comment/:id', withAuth, async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id, {
+      include: [{ model: User }]
+    });
+
+    const post = postData.get({ plain: true });
+
+    res.render('comment', {
+      post,
+      user_id: req.session.user_id,
+      logged_in: req.session.logged_in
     });
   } catch (err) {
     res.status(500).json(err);
