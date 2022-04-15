@@ -1,6 +1,6 @@
 const buttonCreate = document.querySelector('#add-post');
 const buttonUpdate = document.querySelector('#update-post');
-const buttonDelete = document.querySelector('#delete-post');
+const buttonDelete = document.querySelector('delete-post');
 const buttonComment = document.querySelector('#add-comment');
 
 const createPost = async (event) => {
@@ -64,8 +64,6 @@ const deletePost = async (event) => {
 };
 
 const addComment = async (event) => {
-  event.preventDefault();
-
   const acomment = document.querySelector('#comment-text').value;
   if (event.target.hasAttribute('data-id')) {
     const id = event.target.getAttribute('data-id');
@@ -79,7 +77,7 @@ const addComment = async (event) => {
       });
 
       if (response.ok) {
-        document.location.replace('/homepage');
+        document.location.replace('/');
       } else {
         alert('Failed to create a comment');
       }

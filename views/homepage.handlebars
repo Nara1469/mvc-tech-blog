@@ -2,7 +2,7 @@
 {{#each posts as |post| }}
 <div class="row mb-4 post">
   <div class="col-md-12">
-    <div class="card add-space">
+    <div class="card">
       <div class="card-header back-color">
         <h4>{{{get_emoji}}}<a href="/post/{{post.id}}">{{post.title}}</a></h4>
         <p class="text-right">Posted by {{post.user.username}} on {{format_date post.date_created}}</p>
@@ -11,30 +11,34 @@
         <p class="card-text">{{post.content}}</p>
       </div>
       {{#if post.comments}}
-      <div id="comments">
-        <h5>Comments:</h5>
-        <!-- Loop over each comments in a post -->
-        {{#each post.comments as |comment| }}
-          <div class="row comment">
-            <div class="col-md-2">
-            <div class="card add-space">
-            </div>
+      <h5>Comments:</h5>
+      <!-- Loop over each comments in a post -->
+      {{#each post.comments as |comment| }}
+      <div class="row comment">
+        <div class="col-md-2">
+          <div class="card add-space">
           </div>
-          <div class="col-md-10">
-            <div class="card add-space">
-              <div class="card-header back-color">
-                <p class="text-right">Posted by {{comment.user_id}}</p>
-              </div>
-              <div class="card-body">
-                <p class="card-text">{{comment.text_area}}</p>
-              </div>
+        </div>
+        <div class="col-md-10">
+          <div class="card add-space">
+            <div class="card-header back-color">
+              <p class="text-right">Posted by {{comment.user_id}}</p>
+            </div>
+            <div class="card-body">
+              <p class="card-text">{{comment.text_area}}</p>
             </div>
           </div>
         </div>
-        {{/each}}
       </div>
+      {{/each}}
       {{/if}}
     </div>
+    {{#if logged_in}}
+    <p class="text-center">
+      <button class="btn btn-primary"><a href="/comment/{{post.id}}"> Add Comment </a></button>
+    </p>
+    {{/if}}
   </div>
 </div>
+
 {{/each}}

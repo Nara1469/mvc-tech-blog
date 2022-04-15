@@ -1,5 +1,7 @@
+<h3 class="add-space">{{username}} : Make Comment</h3>
 <div class="row mb-4 post">
   <div class="col-md-12">
+    <div class="card">
       <div class="card-header back-color">
         <h4><a href="/post/{{post.id}}">{{post.title}}</a></h4>
         <p class="text-right">Posted by {{post.user.username}} on {{format_date post.date_created}}</p>
@@ -7,22 +9,20 @@
       <div class="card-body">
         <p class="card-text">{{post.content}}</p>
       </div>
+    </div>
   </div>
 </div>
 <div class="row mt-4">
   <div class="col-md-12">
-    <h3>{{post.user.username}}: Add Comment:</h3>
-    <div class="col-md-12">
-    {{!-- <div class="card add-space"> --}}
+    <div class="card">
       <div class="card-header back-color">
-        <label for="comment"></label>
+        <label for="comment">Comment:</label>
       </div>
       <div class="card-body">
-        <textarea id="comment-text" name="comment" style="width: 100%; height: 100%; padding: 10px;" rows="1"></textarea>
+        <textarea id="comment-text" name="comment" style="width: 100%; height: 100%; padding: 10px;"
+          rows="1"></textarea>
       </div>
-      <button type="submit" class="btn btn-primary" id="add-comment"> ADD </button>
-    {{!-- </div> --}}
+      <button class="btn btn-primary" id="add-comment" data-id="{{post.id}}"> ADD </button>
+    </div>
   </div>
 </div>
-
-<script src="/js/dashboard.js"></script>

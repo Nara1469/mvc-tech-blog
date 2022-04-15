@@ -16,12 +16,20 @@ router.get('/', async (req, res) => {
     // });
 
     // const comments = commentData.map((comment) => comment.get({ plain: true }));
-
-    res.render('homepage', {
-      posts,
-      // comments,
-      logged_in: req.session.logged_in
-    });
+    
+    if (req.session.logged_in) {
+      res.render('homepage', {
+        posts,
+        // comments,
+        logged_in: req.session.logged_in
+      });
+    } else {
+      res.render('homepage', {
+        posts,
+        // comments,
+        logged_in: false
+      });
+    }
 
   } catch (err) {
     res.status(500).json(err);
@@ -38,10 +46,18 @@ router.get('/post/:id', async (req, res) => {
 
     const post = postData.get({ plain: true });
 
-    res.render('post', {
-      post,
-      logged_in: req.session.logged_in
-    });
+    if (req.session.logged_in) {
+      res.render('post', {
+        post,
+        logged_in: req.session.logged_in
+      });
+    } else {
+      res.render('post', {
+        post,
+        logged_in: false
+      });
+    }
+
   } catch (err) {
     res.status(500).json(err);
   }
@@ -62,6 +78,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
       user,
       logged_in: true
     });
+
   } catch (err) {
     res.status(500).json(err);
   }
@@ -79,8 +96,10 @@ router.get('/create/:id', withAuth, async (req, res) => {
 
     res.render('create', {
       user,
+      username: req.session.username,
       logged_in: true
     });
+
   } catch (err) {
     res.status(500).json(err);
   }
@@ -98,8 +117,10 @@ router.get('/update/:id', withAuth, async (req, res) => {
 
     res.render('update', {
       post,
-      logged_in: true
+      username: req.session.username,
+      logged_in: req.session.logged_in
     });
+
   } catch (err) {
     res.status(500).json(err);
   }
@@ -117,8 +138,10 @@ router.get('/comment/:id', withAuth, async (req, res) => {
     res.render('comment', {
       post,
       user_id: req.session.user_id,
+      username: req.session.username,
       logged_in: req.session.logged_in
     });
+
   } catch (err) {
     res.status(500).json(err);
   }

@@ -16,6 +16,10 @@ textarea {
   color: #000000;
 }
 
+button {
+  color: white;
+}
+
 .no-button {
   background: none;
   border: none;

@@ -1,7 +1,7 @@
+<h3 class="add-space">{{username}}'s Current Post</h3>
 <div class="row mt-4">
-  <h3>{{post.user.username}}'s Current Post</h3>
   <div class="col-md-12">
-    <div class="card add-space">
+    <div class="card">
       <div class="card-header back-color">
         <label for="post-title">Title:</label>
       </div>
@@ -14,9 +14,7 @@
       <div class="card-body">
         <textarea id="post-content" name="post-content">{{post.content}}</textarea>
       </div>
-      <button type="submit" class="btn btn-primary" id="update-post" data-id="{{post.id}}">SUBMIT</button>
+      <button class="btn btn-primary" id="update-post" data-id="{{post.id}}">SUBMIT</button>
     </div>
   </div>
 </div>
-
-<script src="/js/dashboard.js"></script>
