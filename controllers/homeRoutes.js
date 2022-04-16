@@ -17,19 +17,19 @@ router.get('/', async (req, res) => {
 
     // const comments = commentData.map((comment) => comment.get({ plain: true }));
     
-    if (req.session.logged_in) {
+    // if (req.session.logged_in) {
       res.render('homepage', {
         posts,
         // comments,
         logged_in: req.session.logged_in
       });
-    } else {
-      res.render('homepage', {
-        posts,
-        // comments,
-        logged_in: false
-      });
-    }
+    // } else {
+    //   res.render('homepage', {
+    //     posts,
+    //     // comments,
+    //     logged_in: false
+    //   });
+    // }
 
   } catch (err) {
     res.status(500).json(err);
@@ -46,17 +46,17 @@ router.get('/post/:id', async (req, res) => {
 
     const post = postData.get({ plain: true });
 
-    if (req.session.logged_in) {
+    // if (req.session.logged_in) {
       res.render('post', {
         post,
         logged_in: req.session.logged_in
       });
-    } else {
-      res.render('post', {
-        post,
-        logged_in: false
-      });
-    }
+    // } else {
+    //   res.render('post', {
+    //     post,
+    //     logged_in: false
+    //   });
+    // }
 
   } catch (err) {
     res.status(500).json(err);
