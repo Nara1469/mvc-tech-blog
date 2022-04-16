@@ -25,7 +25,7 @@ router.get('/', async (req, res) => {
       });
     // } else {
     //   res.render('homepage', {
-    //     posts,
+    //     posts, 
     //     // comments,
     //     logged_in: false
     //   });
