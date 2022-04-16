@@ -43,3 +43,7 @@ button {
 .add-space {
   margin-bottom: 15px;
 }
+
+.hide-comment-button {
+  display: none;
+}

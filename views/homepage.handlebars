@@ -33,12 +33,16 @@
       {{/each}}
       {{/if}}
     </div>
-    {{!-- {{#if logged_in}} --}}
     <p class="text-right">
-      <button class="btn btn-primary"><a href="/comment/{{post.id}}"> Add Comment </a></button>
+      <button class="btn btn-primary hide-comment-button"><a href="/comment/{{post.id}}"> Add Comment </a></button>
     </p>
-    {{!-- {{/if}} --}}
   </div>
 </div>
-
 {{/each}}
+{{#if logged_in}}
+<script>
+  document.querySelectorAll(".hide-comment-button").forEach(el => {
+    el.classList.remove("hide-comment-button");
+  });
+</script>
+{{/if}}

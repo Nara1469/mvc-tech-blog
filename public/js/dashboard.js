@@ -1,6 +1,6 @@
 const buttonCreate = document.querySelector('#add-post');
 const buttonUpdate = document.querySelector('#update-post');
-const buttonDelete = document.querySelector('post-list');
+const buttonDelete = document.querySelector('.post-list');
 const buttonComment = document.querySelector('#add-comment');
 
 const createPost = async (event) => {
@@ -72,7 +72,7 @@ const addComment = async (event) => {
     if (acomment) {
       const response = await fetch('/api/comments', {
         method: 'POST',
-        body: JSON.stringify({ acomment }),
+        body: JSON.stringify({ acomment, id }),
         headers: { 'Content-Type': 'application/json' },
       });
 
