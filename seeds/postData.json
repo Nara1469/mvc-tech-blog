@@ -1,7 +1,7 @@
 [
   {
     "title": "Authentication vs. Authorization",
-    "content": "Authentication is the process of verifying a user’s identity and their ability to access a requested account. Authorization, on the other hand, establishes which permissions the user has within an app.",
+    "content": "Authentication is the process of verifying a user’s identity and their ability to access a requested account. Authorization, on the other hand, establishes which permissions the user has within an app. In short, authentication means confirming your own identity, whereas authorization means being allowed access to the system.",
     "date_created": "01/01/2022",
     "user_id": 1
   },
@@ -12,8 +12,8 @@
     "user_id": 2
   },
   {
-    "title": "Roll 'Em Up",
-    "content": "A game for Windows and macOS where players move a ball through a series of increasingly challenging mazes.",
+    "title": "Why MVC is so important",
+    "content": "MVC allows developers to maintain a true separation of concerns, devising their code between the Model layer for data, the View layer for design, and the Controller layer for application logic.",
     "date_created": "03/03/2022",
     "user_id": 3
   }

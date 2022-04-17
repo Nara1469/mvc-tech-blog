@@ -7,13 +7,13 @@
     <div class="card add-space">
       <div class="card-header back-color">
         <h4><a href="/post/{{post.id}}">{{post.title}}</a></h4>
-        <p class="text-right">Posted by {{user.username}} on {{format_date post.date_created}}</p>
+        <p class="text-right">Posted by {{post.username}} on {{format_date post.date_created}}</p>
       </div>
       <div class="card-body">
         <p class="card-text">{{post.content}}</p>
       </div>
         <button class="btn btn-primary"><a href="/update/{{post.id}}">UPDATE</a></button>
-        <button class="btn btn-danger" data-id="{{post.id}}">DELETE</button>
+        <button class="btn btn-danger delete-button" data-id="{{post.id}}">DELETE</button>
     </div>
   </div>
 </div>

@@ -1,4 +1,3 @@
-<h3 class="add-space">{{username}} : Make Comment</h3>
 <div class="row mb-4 post">
   <div class="col-md-12">
     <div class="card">
@@ -16,11 +15,11 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-header back-color">
-        <label for="comment">Comment:</label>
+        <label for="comment">{{username}} : Make Comment</label>
       </div>
       <div class="card-body">
-        <textarea id="comment-text" name="comment" style="width: 100%; height: 100%; padding: 10px;"
-          rows="1"></textarea>
+        <label for="comment">Comment:</label>
+        <textarea id="comment-text" name="comment" rows="2"></textarea>
       </div>
       <button class="btn btn-primary" id="add-comment" data-id="{{post.id}}"> ADD </button>
     </div>
