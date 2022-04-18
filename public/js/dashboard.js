@@ -1,6 +1,6 @@
 const buttonCreate = document.querySelector('#add-post');
 const buttonUpdate = document.querySelector('#update-post');
-const buttonDelete = document.querySelector('.post-list');
+const buttonDelete = document.querySelector('.delete-button');
 const buttonComment = document.querySelector('#add-comment');
 
 const createPost = async (event) => {

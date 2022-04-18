@@ -15,7 +15,7 @@ Bootcamp Week 14: Homework
 
 ## About Task
 
-The purpose of the task is to build a CMS-style blog site similar to a Wordpress site, where developers can publish their blog posts and comment on other developers’ posts as well. This app will follow the MVC paradigm in its architectural structure, using Handlebars.js as the templating language, Sequelize as the ORM, and the express-session npm package for authentication. I built this site completely from scratch and deploy it to Heroku.
+The purpose of the task is to build a CMS-style blog site similar to a Wordpress site, where developers can publish their blog posts and comment on other developers’ posts as well. This app will follow the MVC paradigm in its architectural structure, using Handlebars.js as the templating language, Sequelize as the ORM, and the express-session npm package for authentication. I built this site completely from scratch and deployed it to Heroku.
 
 ## User Story
 
@@ -25,7 +25,37 @@ I WANT a CMS-style blog site
 SO THAT I can publish articles, blog posts, and my thoughts and opinions
 ```
 
-## Acceptance Criteria
+## Database Models
+
+The database name: `blog_db` contains the following four tables:
+
+- User
+- Post
+- Comment
+
+The database structure is shown in the following image:
+
+![Database structure](./assets/blog-database.png)
+
+### Associations
+
+The Sequelize models execute the following relationships using association methods:
+
+* `Post` belongs to `User`, and `User` has many `Post` models, as a user can have multiple posts but a post can only belong to one user.
+
+* `Comment` belongs to `User`, and `User` has many `Comment` models, as a user can have multiple comments but a comment can only belong to one user.
+
+* `Comment` belongs to `Post`, and `Post` has many `Comment` models, as a post can have multiple comments but a comment can only belong to one post.
+
+## Getting Started
+
+Your application’s folder structure must follow the Model-View-Controller paradigm. You’ll need to use the [express-handlebars](https://www.npmjs.com/package/express-handlebars) package to implement Handlebars.js for your Views, use the [MySQL2](https://www.npmjs.com/package/mysql2) and [Sequelize](https://www.npmjs.com/package/sequelize) packages to connect to a MySQL database for your Models, and create an Express.js API for your Controllers.
+
+You’ll also need the [dotenv package](https://www.npmjs.com/package/dotenv) to use environment variables, the [bcrypt package](https://www.npmjs.com/package/bcrypt) to hash passwords, and the [express-session](https://www.npmjs.com/package/express-session) and [connect-session-sequelize](https://www.npmjs.com/package/connect-session-sequelize) packages to add authentication.
+
+**Note**: The [express-session](https://www.npmjs.com/package/express-session) package stores the session data on the client in a cookie. When you are idle on the site for more than a set time, the cookie will expire and you will be required to log in again to start a new session. This is the default behavior and you do not have to do anything to your application other than implement the npm package.
+
+## My Solution
 
 ```md
 GIVEN a CMS-style blog site
@@ -63,56 +93,40 @@ WHEN I am idle on the site for more than a set time
 THEN I am able to view comments but I am prompted to log in again before I can add, update, or delete comments
 ```
 
-## Database Models
-
-The database name: `blog_db` contains the following four tables:
-
-- User
-- Post
-- Comment
-
-The database structure is shown in the following image:
-
-![Database structure](./assets/blog-database.png)
-
-### Associations
-
-The Sequelize models execute the following relationships using association methods:
-
-* `Post` belongs to `User`, and `User` has many `Post` models, as a user can have multiple posts but a post can only belong to one user.
-
-* `Comment` belongs to `User`, and `User` has many `Comment` models, as a user can have multiple comments but a comment can only belong to one user.
-
-* `Comment` belongs to `Post`, and `Post` has many `Comment` models, as a post can have multiple comments but a comment can only belong to one post.
-
-> **Note:** The foreign key relationship setup is important in the respective models. It was the challenging part of this task.
-
-## Getting Started
-
-Your application’s folder structure must follow the Model-View-Controller paradigm. You’ll need to use the [express-handlebars](https://www.npmjs.com/package/express-handlebars) package to implement Handlebars.js for your Views, use the [MySQL2](https://www.npmjs.com/package/mysql2) and [Sequelize](https://www.npmjs.com/package/sequelize) packages to connect to a MySQL database for your Models, and create an Express.js API for your Controllers.
-
-You’ll also need the [dotenv package](https://www.npmjs.com/package/dotenv) to use environment variables, the [bcrypt package](https://www.npmjs.com/package/bcrypt) to hash passwords, and the [express-session](https://www.npmjs.com/package/express-session) and [connect-session-sequelize](https://www.npmjs.com/package/connect-session-sequelize) packages to add authentication.
-
-**Note**: The [express-session](https://www.npmjs.com/package/express-session) package stores the session data on the client in a cookie. When you are idle on the site for more than a set time, the cookie will expire and you will be required to log in again to start a new session. This is the default behavior and you do not have to do anything to your application other than implement the npm package.
-
-
-### Technical Acceptance Criteria: 40%
-
-* Satisfies all of the preceding acceptance criteria plus the following:
-
-    * Application’s folder structure follows the Model-View-Controller paradigm.
-
-    * Uses the [express-handlebars](https://www.npmjs.com/package/express-handlebars) package to implement Handlebars.js for your Views.
-
-    * Application must be deployed to Heroku.
-
-
-### Screenshots 
-
-The following image shows the deployed HTML’s appearance: ![Heroku](./helpers/note-taker-application-heroku.png)
+```                      
+Tech Blog
+|
+blog_db database - Model               Controller         View  
+|
+├── /          root route              homeRoutes.js
+│   ├── /homepage                                         homepage.handlebars
+│   ├── /post/:id                                         post.handlebars  
+│   ├── /login                                            login.handlebars
+│   ├── /dashboard                                        dashboard.handlebars
+│   ├── /create/:id                                       create.handlebars     
+│   ├── /update/:id                                       update.handlebars
+│   └── /comment/:id                                      comment.handlebars
+├── /api/users                         userRoutes.js              
+│   ├── POST  adding a new user           
+│   ├── POST  checking existing user                      /api/users/login          
+│   └── POST  ends user's login                           /api/users/logout 
+├── /api/posts                         postRoutes.js                  
+│   ├── GET   READ posts              
+│   ├── GET   READ post By ID   
+│   ├── POST  CREATE post               
+│   ├── PUT   UPDATE post By ID               
+│   └── DEL   DELETE post By ID
+└──/api/comments                       commentRoutes.js
+    ├── POST  CREATE comment
+    ├── DEL   DELETE comment By ID  
+    ├── GET   READ comment By ID                            
+    └── GET   READ comments
+```
 
 ## Live
 
 This application is deployed to Heroku.com. Here is a link to the deployed website. [Heroku](https://the-tech-blog-mvc-structure.herokuapp.com/)
+
+The following image shows the deployed HTML’s appearance: ![Homepage](./assets/tech-blog-homepage.png)
 
 If you have any questions about the repo, open an issue or contact me directly at naraamtm@gmail.com. Here is a link to this application repo on [Github](https://github.com/Nara1469/mvc-tech-blog).
