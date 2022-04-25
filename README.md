@@ -133,7 +133,7 @@ This application is deployed to Heroku.com. Here is a link to the deployed websi
 
 The following image shows the deployed HTML’s appearance: ![Homepage](./assets/tech-blog-homepage.png)
 
-If you have any questions about the repo, open an issue or contact me directly at naraamtm@gmail.com. Here is a link to this application repo on [Github](https://github.com/Nara1469/mvc-tech-blog).
+If you have any questions about the repo, open an issue or contact me directly at naraamtm@gmail.com. Here is a link to this application repo on [GitHub](https://github.com/Nara1469/mvc-tech-blog).
 
 The following images show some of the `Views` screenshots: 
 - DASHBOARD ![Dashboard](./assets/tech-blog-dashboard.png)

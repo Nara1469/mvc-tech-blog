@@ -22,7 +22,7 @@
         <div class="col-md-10">
           <div class="card add-space">
             <div class="card-header back-color">
-              <p class="text-right">Posted by {{comment.user_id}}</p>
+              <p class="text-right">Commented by {{comment.username}} on {{format_date comment.date_created}}</p>
             </div>
             <div class="card-body">
               <p class="card-text">{{comment.text_area}}</p>

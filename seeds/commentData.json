@@ -1,21 +1,29 @@
 [
   {
     "text_area": "The Ultimate Tech Quiz",
+    "date_created": "04/04/2022",
+    "username": "Sal",
     "user_id": 3,
     "post_id": 1
   },
   {
     "text_area": "Roll 'Em Up",
+    "date_created": "03/03/2022",
+    "username": "Amiko",
     "user_id": 1,
     "post_id": 2
   },
   {
     "text_area": "Music Near Me",
+    "date_created": "02/02/2022",
+    "username": "Sal",
     "user_id": 3,
     "post_id": 2
   },
   {
     "text_area": "The Ultimate Tech Quiz",
+    "date_created": "01/01/2022",
+    "username": "Amiko",
     "user_id": 1,
     "post_id": 3
   }

@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { Post, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
-// Show all posts in homepage
+// Read "Homepage" to show all posts
 router.get('/', async (req, res) => {
   try {
     const postData = await Post.findAll({
@@ -11,32 +11,17 @@ router.get('/', async (req, res) => {
 
     const posts = postData.map((post) => post.get({ plain: true }));
 
-    // const commentData = await Comment.findAll({
-    //   include: [{ model: User }, { model: Post }]
-    // });
-
-    // const comments = commentData.map((comment) => comment.get({ plain: true }));
-    
-    // if (req.session.logged_in) {
-      res.render('homepage', {
-        posts,
-        // comments,
-        logged_in: req.session.logged_in
-      });
-    // } else {
-    //   res.render('homepage', {
-    //     posts, 
-    //     // comments,
-    //     logged_in: false
-    //   });
-    // }
+    res.render('homepage', {
+      posts,
+      logged_in: req.session.logged_in
+    });
 
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// Show the clicked post
+// Read the clicked "Post" page
 router.get('/post/:id', async (req, res) => {
   try {
     console.log("Parameter ID:" + req.params.id);
@@ -46,17 +31,10 @@ router.get('/post/:id', async (req, res) => {
 
     const post = postData.get({ plain: true });
 
-    // if (req.session.logged_in) {
-      res.render('post', {
-        post,
-        logged_in: req.session.logged_in
-      });
-    // } else {
-    //   res.render('post', {
-    //     post,
-    //     logged_in: false
-    //   });
-    // }
+    res.render('post', {
+      post,
+      logged_in: req.session.logged_in
+    });
 
   } catch (err) {
     res.status(500).json(err);
@@ -64,9 +42,10 @@ router.get('/post/:id', async (req, res) => {
 });
 
 // Use withAuth middleware to prevent access to route
+// Read logged-in user's "Dashboard" page
 router.get('/dashboard', withAuth, async (req, res) => {
   try {
-    // Find the logged in user based on the session ID
+    // Find the logged-in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
       include: [{ model: Post }]
@@ -84,7 +63,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
   }
 });
 
-// Create a new post
+// Read "Create a new post" page
 router.get('/create/:id', withAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
@@ -105,7 +84,7 @@ router.get('/create/:id', withAuth, async (req, res) => {
   }
 });
 
-// Update a post
+// Read "Update a post" page
 router.get('/update/:id', withAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
@@ -126,7 +105,7 @@ router.get('/update/:id', withAuth, async (req, res) => {
   }
 });
 
-// Add a comment
+// Read "Add a comment" page
 router.get('/comment/:id', withAuth, async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id, {
