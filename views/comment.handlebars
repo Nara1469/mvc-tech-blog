@@ -8,6 +8,28 @@
       <div class="card-body">
         <p class="card-text">{{post.content}}</p>
       </div>
+      {{#if post.comments}}
+      <h5>Comments:</h5>
+      <!-- Loop over each comments in a post -->
+      {{#each post.comments as |comment| }}
+      <div class="row comment">
+        <div class="col-md-2">
+          <div class="card add-space">
+          </div>
+        </div>
+        <div class="col-md-10">
+          <div class="card add-space">
+            <div class="card-header back-color">
+              <p class="text-right">Commented by {{comment.username}} on {{format_date comment.date_created}}</p>
+            </div>
+            <div class="card-body">
+              <p class="card-text">{{comment.text_area}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+      {{/if}}
     </div>
   </div>
 </div>

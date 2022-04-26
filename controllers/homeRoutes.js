@@ -109,7 +109,7 @@ router.get('/update/:id', withAuth, async (req, res) => {
 router.get('/comment/:id', withAuth, async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id, {
-      include: [{ model: User }]
+      include: [{ model: User }, { model: Comment }]
     });
 
     const post = postData.get({ plain: true });

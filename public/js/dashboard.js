@@ -1,7 +1,15 @@
 const buttonCreate = document.querySelector('#add-post');
 const buttonUpdate = document.querySelector('#update-post');
-const buttonDelete = document.querySelector('.delete-button');
+// const buttonDelete = document.querySelector('.delete-button');
 const buttonComment = document.querySelector('#add-comment');
+$('#button9').on('click', function () {
+  const text = $('#todo9').children(0).val();
+  if (text) {
+    todoArray[0].actText = text;
+    localStorage.clear();
+    localStorage.setItem("todoArray", JSON.stringify(todoArray));
+  }
+});
 
 const createPost = async (event) => {
   event.preventDefault();
@@ -77,7 +85,7 @@ const addComment = async (event) => {
       });
 
       if (response.ok) {
-        document.location.replace('/');
+        document.location.replace(`/post/${id}`);
       } else {
         alert('Failed to create a comment');
       }
@@ -93,10 +101,12 @@ if (buttonUpdate) {
   buttonUpdate.addEventListener('click', updatePost);
 }
 
-if (buttonDelete) {
-  buttonDelete.addEventListener('click', deletePost);
-}
+// if (buttonDelete) {
+//   buttonDelete.addEventListener('click', deletePost);
+// }
 
 if (buttonComment) {
   buttonComment.addEventListener('click', addComment);
 }
+
+$('.delete-button').on('click', deletePost);
