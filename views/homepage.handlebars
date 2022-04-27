@@ -1,3 +1,6 @@
+{{#if logged_in}}
+<h3 class="text-center add-space">Welcome, <span id="username">{{username}}</span>!</h3>
+{{/if}}
 <!-- Loop over each post in the posts array -->
 {{#each posts as |post| }}
 <div class="row mb-4 post">
@@ -22,7 +25,7 @@
         <div class="col-md-10">
           <div class="card add-space">
             <div class="card-header back-color">
-              <p class="text-right">Commented by {{comment.username}} on {{format_date comment.date_created}}</p>
+              <p class="text-right"><button class="no-button each-comment" data-id="{{comment.id}}">Commented by {{comment.username}} on {{format_date comment.date_created}}</button></p>
             </div>
             <div class="card-body">
               <p class="card-text">{{comment.text_area}}</p>

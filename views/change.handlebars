@@ -1,0 +1,31 @@
+{{#if logged_in}}
+<h3 class="text-center add-space">Welcome, <span id="username">{{username}}</span>!</h3>
+{{/if}}
+<div class="row mb-4 post">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header back-color">
+        <h4 id="post-id" data-id="{{comment.post.id}}"><a href="/post/{{comment.post.id}}">{{comment.post.title}}</a></h4>
+        <p class="text-right">Posted by {{comment.user.username}} on {{format_date comment.post.date_created}}</p>
+      </div>
+      <div class="card-body">
+        <p class="card-text">{{comment.post.content}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row mt-4">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header back-color">
+        <label for="comment">{{username}} : Update Your Comment</label>
+      </div>
+      <div class="card-body">
+        <label for="comment">Comment:</label>
+        <textarea id="comment-text" name="comment" rows="2">{{comment.text_area}}</textarea>
+      </div>
+      <button class="btn btn-primary" id="update-comment" data-id="{{comment.id}}"> UPDATE COMMENT </button>
+      <button class="btn btn-danger" id="delete-comment" data-id="{{comment.id}}">DELETE COMMENT </button>
+    </div>
+  </div>
+</div>

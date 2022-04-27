@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { Post, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
-// Read "Homepage" to show all posts
+// Read "homepage" to show all posts
 router.get('/', async (req, res) => {
   try {
     const postData = await Post.findAll({
@@ -13,6 +13,7 @@ router.get('/', async (req, res) => {
 
     res.render('homepage', {
       posts,
+      username: req.session.username,
       logged_in: req.session.logged_in
     });
 
@@ -21,7 +22,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Read the clicked "Post" page
+// Read the clicked "post" page
 router.get('/post/:id', async (req, res) => {
   try {
     console.log("Parameter ID:" + req.params.id);
@@ -33,6 +34,7 @@ router.get('/post/:id', async (req, res) => {
 
     res.render('post', {
       post,
+      username: req.session.username,
       logged_in: req.session.logged_in
     });
 
@@ -42,7 +44,7 @@ router.get('/post/:id', async (req, res) => {
 });
 
 // Use withAuth middleware to prevent access to route
-// Read logged-in user's "Dashboard" page
+// Read logged-in user's "dashboard" page
 router.get('/dashboard', withAuth, async (req, res) => {
   try {
     // Find the logged-in user based on the session ID
@@ -63,7 +65,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
   }
 });
 
-// Read "Create a new post" page
+// Read "create" new post page
 router.get('/create/:id', withAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
@@ -84,7 +86,7 @@ router.get('/create/:id', withAuth, async (req, res) => {
   }
 });
 
-// Read "Update a post" page
+// Read "update" post page
 router.get('/update/:id', withAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
@@ -105,9 +107,10 @@ router.get('/update/:id', withAuth, async (req, res) => {
   }
 });
 
-// Read "Add a comment" page
+// Read add "comment" page
 router.get('/comment/:id', withAuth, async (req, res) => {
   try {
+    // req.params.id = Post.id
     const postData = await Post.findByPk(req.params.id, {
       include: [{ model: User }, { model: Comment }]
     });
@@ -116,6 +119,28 @@ router.get('/comment/:id', withAuth, async (req, res) => {
 
     res.render('comment', {
       post,
+      user_id: req.session.user_id,
+      username: req.session.username,
+      logged_in: req.session.logged_in
+    });
+
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Read "change" page for updating comment
+router.get('/change/:id', withAuth, async (req, res) => {
+  try {
+    // req.params.id = Comment.id
+    const commentData = await Comment.findByPk(req.params.id, {
+      include: [{ model: User }, { model: Post }]
+    });
+
+    const comment = commentData.get({ plain: true });
+
+    res.render('change', {
+      comment,
       user_id: req.session.user_id,
       username: req.session.username,
       logged_in: req.session.logged_in

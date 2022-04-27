@@ -109,7 +109,8 @@ blog_db database - Model               Controller         View
 │   ├── /dashboard                                        dashboard.handlebars
 │   ├── /create/:id                                       create.handlebars     
 │   ├── /update/:id                                       update.handlebars
-│   └── /comment/:id                                      comment.handlebars
+│   ├── /comment/:id                                      comment.handlebars
+│   └── /change/:id                                       change.handlebars
 ├── /api/users                         userRoutes.js              
 │   ├── POST  adding a new user           
 │   ├── POST  checking existing user                      /api/users/login          
@@ -141,3 +142,4 @@ The following images show some of the `Views` screenshots:
 - Create a new post ![Create a new post](./assets/tech-blog-new.png)
 - Update an existing post ![Update an existing post](./assets/tech-blog-update.png)
 - Add a comment ![Add Comment](./assets/tech-blog-comment.png)
+- Update/Delete a comment ![Change Comment](./assets/tech-blog-update-comment.png)

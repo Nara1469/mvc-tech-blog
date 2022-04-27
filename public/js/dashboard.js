@@ -1,15 +1,9 @@
 const buttonCreate = document.querySelector('#add-post');
 const buttonUpdate = document.querySelector('#update-post');
-// const buttonDelete = document.querySelector('.delete-button');
-const buttonComment = document.querySelector('#add-comment');
-$('#button9').on('click', function () {
-  const text = $('#todo9').children(0).val();
-  if (text) {
-    todoArray[0].actText = text;
-    localStorage.clear();
-    localStorage.setItem("todoArray", JSON.stringify(todoArray));
-  }
-});
+const btnAddComment = document.querySelector('#add-comment');
+const btnUpdateComment = document.querySelector('#update-comment');
+const btnDeleteComment = document.querySelector('#delete-comment');
+const welcome = document.querySelector('#username');
 
 const createPost = async (event) => {
   event.preventDefault();
@@ -93,6 +87,72 @@ const addComment = async (event) => {
   }
 };
 
+const showComment = (event) => {
+  if (event.target.hasAttribute('data-id')) {
+    const id = event.target.getAttribute('data-id');
+    if (welcome) {
+      const username = welcome.textContent;
+
+      fetch(`/api/comments/${id}`)
+        .then(function (response) {
+          if (response.ok) {
+            response.json().then(function (data) {
+              console.log(data);
+              console.log(data.username);
+              if (data.username === username) {
+                document.location.replace(`/change/${id}`);
+              }
+            });
+          } else {
+            alert('Failed to find comment!');
+          }
+        });
+    }
+  }
+};
+
+const updateComment = async (event) => {
+  event.preventDefault();
+
+  const text = document.querySelector('#comment-text').value;
+  const id = event.target.getAttribute('data-id');
+  const postId = document.getElementById('post-id').getAttribute('data-id');
+  console.log(postId);
+
+  if (text) {
+    const response = await fetch(`/api/comments/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify({ text }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response.ok) {
+      document.location.replace(`/post/${postId}`);
+    } else {
+      alert('Failed to update a post, please try again');
+    }
+  }
+};
+
+const deleteComment = async (event) => {
+  if (event.target.hasAttribute('data-id')) {
+    const id = event.target.getAttribute('data-id');
+    const postId = document.getElementById('post-id').getAttribute('data-id');
+
+    const response = await fetch(`/api/comments/${id}`, {
+      method: 'DELETE',
+    });
+
+    if (response.ok) {
+      document.location.replace(`/post/${postId}`);
+    } else {
+      alert('Failed to delete post');
+    }
+  }
+};
+
+// ---------------- Event Listeners ----------------
+
 if (buttonCreate) {
   buttonCreate.addEventListener('click', createPost);
 }
@@ -101,12 +161,18 @@ if (buttonUpdate) {
   buttonUpdate.addEventListener('click', updatePost);
 }
 
-// if (buttonDelete) {
-//   buttonDelete.addEventListener('click', deletePost);
-// }
+if (btnAddComment) {
+  btnAddComment.addEventListener('click', addComment);
+}
 
-if (buttonComment) {
-  buttonComment.addEventListener('click', addComment);
+if (btnUpdateComment) {
+  btnUpdateComment.addEventListener('click', updateComment);
+}
+
+if (btnDeleteComment) {
+  btnDeleteComment.addEventListener('click', deleteComment);
 }
 
 $('.delete-button').on('click', deletePost);
+
+$('.each-comment').on('click', showComment);
