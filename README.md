@@ -87,6 +87,8 @@ When an existing blog post is clicked, it navigates to `post.handlebars`. The po
 
 If a user leaves a comment and clicks on the submit button while signed in, the comment is saved and the post is updated to display with the comment, the comment creator’s username, and the date created.
 
+Also the user can update, or delete comments. When the user clicked on only his/her comment while signed in, it navigates to `change.handlebars`, then he/she able to update his/her comment, or delete the comment.
+
 The dashboard option in the navigation is clicked, and the user is taken to the dashboard and presented with all the blog posts he/she has already created and the option to add a new blog post.
 
 If the user wants to add a new blog post, the user is directed to `create.handlebars` to enter both a title and contents for the blog post. Then those inputs are saved in the database, the user is taken back to an updated dashboard with the new blog post.
