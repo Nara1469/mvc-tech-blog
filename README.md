@@ -1,6 +1,6 @@
 # mvc-tech-blog
 
-Bootcamp Week 14: Homework
+Tech Blog Application follows MVC paradigm
 
 # 14 Model-View-Controller (MVC): Tech Blog
 
